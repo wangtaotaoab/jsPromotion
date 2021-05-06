@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="calculator J_calculator">
+    <p>结果： <span class="result">0</span></p>
+    <div class="input-group">
+      <input type="text" value="0">
+      <input type="text" value="0">
+    </div>
+    <div class="button-group">
+      <button data-method="plus">+</button>
+      <button data-method="minus">-</button>
+      <button data-method="mul">*</button>
+      <button data-method="div">/</button>
+    </div>
+  </div>
+  <script src="./tools.js"></script>
+  <script src="./compute.js"></script>
+  <script>
+    ;(function (doc){
+      // document是在全局作用域window上的，需要把document放到独立作用域里
+
+      var oCalculator = doc.getElementsByClassName('J_calculator')[0],
+        oResult = doc.getElementsByClassName('result')[0],
+        fInput = doc.getElementsByTagName('input')[0],
+        sInput = doc.getElementsByTagName('input')[1],
+        oBtnGroup = doc.getElementsByClassName('button-group')[0];
+      
+      var init = function(){
+        bindEvent();
+      } 
+
+      function bindEvent(){
+        oBtnGroup.addEventListener('click',btnOnclick,false);
+        //addEventListener注册事件监听，会一直保存在内存中，需要手动注销
+        // oBtnGroup.removeEventListener
+      }
+      function btnOnclick(event){
+        // 兼容性
+        // 做事件代理  通过事件对象和事件源对象来获取事件
+                tar = tools.getTarget(event) , // 获取到源对象
+                tagName = tar.tagName.toLowerCase();
+        if(tagName === 'button'){
+          var method = tar.getAttribute('data-method'); // getAttribute(attributename) 方法返回指定属性名的属性值,attributename必需。需要获得属性值的属性名称。
+          var fVal = tools.digitalize(fInput.value);
+          var sVal = tools.digitalize(sInput.value);
+          var res = compute[method](fVal,sVal);
+          rendResult(res);
+        }
+      }
+
+      function rendResult(result){
+        oResult.innerHTML = result;
+      }
+      init();
+    })(document);
+        
+  </script>
+</body>
+</html>

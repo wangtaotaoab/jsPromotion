@@ -1,0 +1,10 @@
+/* 
+  es7/es8以上的语法必须要单独babelrc
+*/
+{
+  "presets":["env"],
+  "plugins": [
+    "babel-plugin-transform-runtime",
+    "transform-decorators-legacy"
+  ]
+}
