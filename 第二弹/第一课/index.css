@@ -1,0 +1,40 @@
+.tab{
+  width: 500px;
+  height: 500px;
+  margin: 50px auto;
+  border: 1px solid #000;
+}
+.tab .nav{
+  height: 50px;
+  border-bottom: 1px solid #000;
+  display: flex;
+  justify-content: space-around;
+}
+.tab .nav .nav-item{
+  width: 33.333%;
+  text-align: center;
+  line-height: 50px;
+}
+.tab .nav .nav-item.current{
+  background-color: orange;
+  color: #fff;
+}
+
+.tab .page{
+  position: relative;
+  height: 450px;
+}
+.tab .page .page-item{
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 450px;
+  font-size: 100px;
+}
+.tab .page .page-item.current{
+  display: block;
+}
